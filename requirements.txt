@@ -1,0 +1,45 @@
+# llm api
+openai==1.30.1
+
+# llm framework
+langchain==0.2.1
+
+# llm rag
+## chunk
+langchain-text-splitters
+
+## db
+pysqlite3-binary==0.5.2.post3
+chromadb==0.5.0
+langchain-chroma==0.1.1
+
+## embeddings
+open-text-embeddings==1.0.4
+
+## guardrails
+guardrails-ai==0.4.5
+
+## evaluation
+ragas==0.1.9
+
+# localization
+OpenCC==1.1.7
+
+# jupyter
+ipykernel==6.29.4
+pickleshare==0.7.5
+
+# data preprocessing
+beautifulsoup4==4.12.3
+unstructured==0.14.3
+networkx==3.3
+openpyxl==3.1.3
+PyMuPDF==1.24.4
+jq==1.7.0
+
+# web
+streamlit==1.25.0
+
+# refactor
+black==24.4.2
+isort==5.13.2

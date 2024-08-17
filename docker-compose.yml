@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  llm-app:
+    container_name: "llm-app"
+    build:
+      dockerfile: Dockerfile
+      context: .
+      network: host
+    image: "llm-app"
+    stdin_open: true
+    tty: true
+    ports:
+      - 80:80
+    secrets:
+      - openai_api_key
+    volumes:
+      - .:/workspaces
+      - /tmp/upload:/upload
+    command: streamlit run src/entrypoint/app.py --server.port 80
+
+  chromadb:
+    container_name: "llm-app-chromadb"
+    image: "chromadb/chroma:0.5.0"
+    ports:
+      - 8000:8000
+    volumes:
+      - /tmp/chroma:/chroma/chroma
+
+secrets:
+  openai_api_key:
+    file: ./secrets/openai_api_key.json
