@@ -13,8 +13,6 @@ import pandas as pd
 import streamlit as st
 
 
-
-
 def view_collections(db):
     st.header("DB: %s" % db)
 
@@ -32,5 +30,6 @@ def view_collections(db):
         df = pd.DataFrame.from_dict(data)
         st.subheader("Collection: **%s**" % collection.name)
         st.dataframe(df)
+
 
 view_collections("chromadb:8000")

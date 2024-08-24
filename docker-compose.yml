@@ -14,7 +14,7 @@ services:
     secrets:
       - openai_api_key
     volumes:
-      - .:/workspaces
+      - ./secrets:/workspaces/secrets:ro
       - /tmp/upload:/upload
     environment:
       - COLLECTION=demo

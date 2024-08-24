@@ -186,6 +186,11 @@ class Rag:
 ```
 
 # Demo
+範例資料：
+- data/所得稅法.pdf
+- data/遺產及贈與稅法.pdf
+
+
 Query:
 ```python
 query = "上班的服裝費可以抵稅嗎？"
