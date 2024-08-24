@@ -1,5 +1,61 @@
 # llm-demo
 
+## 請 Claude 對以下 readme　的描述畫 PlantUML
+```mermaid
+classDiagram
+    class StreamlitApp {
+        +file_uploader()
+        +display_results()
+    }
+
+    class VectorDB {
+        -collection_name
+        -client
+        -db
+        +index(docs)
+        +add_docs(docs)
+    }
+
+    class Rag {
+        -db
+        -retriever
+        -qa
+        +predict(query)
+    }
+
+    class OpenAIEmbeddings {
+        +embed_documents()
+        +embed_query()
+    }
+
+    class ChromaDB {
+        +add_documents()
+        +similarity_search()
+    }
+
+    class PyMuPDFLoader {
+        +load()
+    }
+
+    class ChatOpenAI {
+        +generate()
+    }
+
+    class ConversationalRetrievalChain {
+        +invoke(query)
+    }
+
+    StreamlitApp --> VectorDB : uses
+    StreamlitApp --> Rag : uses
+    StreamlitApp --> PyMuPDFLoader : uses
+    VectorDB --> ChromaDB : uses
+    VectorDB --> OpenAIEmbeddings : uses
+    Rag --> VectorDB : uses
+    Rag --> ChatOpenAI : uses
+    Rag --> ConversationalRetrievalChain : uses
+
+```
+
 # 設定
 ## OpenAI API 設定
 `secrets/openai_api_key.json`
@@ -60,7 +116,7 @@ class VectorDB:
         )
 ```
 
-## 對文件建立索引
+## 對上傳文件建立索引
 上傳 PDF 檔案：Document loader (PyMuPDFLoader)
 ```python
 import streamlit as st
@@ -83,7 +139,7 @@ if uploaded is not None:
 ```
 
 # 檢索增強生成（Retrieval-Augmented Generation, RAG)
-## 生成 by LLM
+## LLM
 ```python
 from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(temperature=0.0, model="gpt-4o-mini")
@@ -99,7 +155,7 @@ Question: {question}
 Answer(Let's think step by step):"""
 ```
 
-## RAG
+## RAG (ConversationalRetrievalChain)
 ```python
 class Rag:
     def __init__(self, vector_db) -> None:

@@ -170,3 +170,6 @@ secrets/
 
 # mac
 .DS_Store
+
+# ngrok
+ngrok*

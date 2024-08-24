@@ -15,7 +15,7 @@ services:
       - openai_api_key
     volumes:
       - .:/workspaces
-      # - /tmp/upload:/upload
+      - /tmp/upload-dev:/upload
     environment:
       - COLLECTION=dev
     command: streamlit run src/entrypoint/app.py --server.port 80
