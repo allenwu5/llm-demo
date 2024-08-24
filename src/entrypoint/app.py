@@ -3,7 +3,6 @@ import streamlit as st
 import sys
 import pandas as pd
 from pathlib import Path
-import streamlit as st
 
 from langchain_community.document_loaders import PyMuPDFLoader
 
@@ -13,16 +12,15 @@ sys.path.append("/workspaces")
 
 from src.service.rag import Rag
 from src.service.vectordb import VectorDB
+from os import environ
 
-
-
-
+COLLECTION=environ["COLLECTION"]
 
 def main():
-    db = VectorDB("demo")
+    db = VectorDB(COLLECTION)
     if st.sidebar.button("Clean"):
         db.delete_collection()
-        db = VectorDB("demo")
+        db = VectorDB(COLLECTION)
         for f in Path("/upload").iterdir():
             f.unlink()
         
